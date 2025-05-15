@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spice Symphony - A Culinary Journey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #f1faee;
+            --accent: #a8dadc;
+            --dark: #1d3557;
+            --light-dark: #457b9d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            background: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            background: rgba(30, 30, 30, 0.9);
+            padding: 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        section {
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto;
+        }
+        
+        .about {
+            background-color: white;
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 50px;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .menu {
+            background-color: var(--secondary);
+        }
+        
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .menu-item-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .menu-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .menu-item:hover .menu-item-img img {
+            transform: scale(1.1);
+        }
+        
+        .menu-item-info {
+            padding: 20px;
+        }
+        
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .menu-item-name {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+        
+        .menu-item-price {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .menu-item-desc {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .menu-item-rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+        
+        .gallery {
+            background-color: white;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-item-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .testimonials {
+            background-color: var(--secondary);
+        }
+        
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-slider {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 0 15px;
+            text-align: center;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary);
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .testimonial-role {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .contact {
+            background-color: white;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .contact-details {
+            margin-top: 30px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-detail i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background: var(--secondary);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(30, 30, 30, 0.9);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: all 0.5s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+                color: white;
+                font-size: 1.5rem;
+            }
+            
+            .menu-items {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Spice Symphony</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home">
+        <h1 class="logo">Spice Symphony</h1>
+        <p class="tagline">Where Flavors Dance on Your Palate</p>
+        <div>
+            <a href="#menu" class="btn">Explore Menu</a>
+            <a href="#contact" class="btn">Book a Table</a>
+        </div>
+    </header>
+
+    <section class="about" id="about">
+        <h2 class="section-title">Our Story</h2>
+        <div class="about-container">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Restaurant Interior">
+            </div>
+            <div class="about-text">
+                <h3>A Culinary Journey Through India</h3>
+                <p>Founded in 2010, Spice Symphony brings together the rich culinary traditions of North India with innovative fusion touches. Our chef, Rajiv Kapoor, trained in the royal kitchens of Rajasthan and the bustling streets of Delhi, creates dishes that tell a story.</p>
+                <p>We source our ingredients locally and sustainably, ensuring each dish not only tastes authentic but also supports our community. Our spices are freshly ground daily, and our tandoor fires burn with aromatic woods to impart that distinctive smoky flavor.</p>
+                <p>At Spice Symphony, we believe dining is an experience - from the warm ambiance to the carefully curated wine pairings, every detail is designed to transport you to the vibrant heart of India.</p>
+                <a href="#menu" class="btn">Discover Our Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu" id="menu">
+        <h2 class="section-title">Our Menu</h2>
+        <div class="menu-container">
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="starters">Starters</button>
+                <button class="category-btn" data-category="north-indian">North Indian</button>
+                <button class="category-btn" data-category="chinese">Chinese</button>
+                <button class="category-btn" data-category="breads">Breads</button>
+                <button class="category-btn" data-category="drinks">Drinks</button>
+                <button class="category-btn" data-category="desserts">Desserts</button>
+            </div>
+            <div class="menu-items">
+                <!-- Starters -->
+                <div class="menu-item" data-category="starters">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Paneer Tikka">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Paneer Tikka</h3>
+                            <span class="menu-item-price">$8.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="menu-item-desc">Cubes of paneer marinated in spiced yogurt and grilled in tandoor, served with mint chutney.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="starters">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1631898035268-d7d57a95fdef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Chicken 65">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Chicken 65</h3>
+                            <span class="menu-item-price">$9.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="menu-item-desc">Spicy, deep-fried chicken chunks marinated in ginger, garlic and a blend of Indian spices.</p>
+                    </div>
+                </div>
+
+                <!-- North Indian -->
+                <div class="menu-item" data-category="north-indian">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Butter Chicken">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Butter Chicken</h3>
+                            <span class="menu-item-price">$14.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="menu-item-desc">Tender chicken pieces cooked in a creamy tomato sauce with butter and aromatic spices.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="north-indian">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1633945274309-2c16c9682a8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rogan Josh">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Rogan Josh</h3>
+                            <span class="menu-item-price">$15.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="menu-item-desc">Aromatic lamb curry from Kashmir with deep red gravy and flavors of fennel and ginger.</p>
+                    </div>
+                </div>
+
+                <!-- Chinese -->
+                <div class="menu-item" data-category="chinese">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Hakka Noodles">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Hakka Noodles</h3>
+                            <span class="menu-item-price">$11.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="menu-item-desc">Stir-fried noodles with vegetables in a spicy Indo-Chinese sauce.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="chinese">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Manchurian">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Vegetable Manchurian</h3>
+                            <span class="menu-item-price">$10.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="menu-item-desc">Fried vegetable balls in a spicy, tangy sauce with Indo-Chinese flavors.</p>
+                    </div>
+                </div>
+
+                <!-- Breads -->
+                <div class="menu-item" data-category="breads">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1601050690117-64b6d2a6a2c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Garlic Naan">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Garlic Naan</h3>
+                            <span class="menu-item-price">$3.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="menu-item-desc">Soft leavened bread baked in tandoor with fresh garlic and butter.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="breads">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lachha Paratha">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Lachha Paratha</h3>
+                            <span class="menu-item-price">$4.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="menu-item-desc">Flaky, layered whole wheat bread cooked on griddle with ghee.</p>
+                    </div>
+                </div>
+
+                <!-- Drinks -->
+                <div class="menu-item" data-category="drinks">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mango Lassi">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Mango Lassi</h3>
+                            <span class="menu-item-price">$4.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="menu-item-desc">Sweet yogurt drink blended with ripe mangoes and cardamom.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="drinks">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Indian Wine">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Sula Vineyards Shiraz</h3>
+                            <span class="menu-item-price">$8.99/glass</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="menu-item-desc">Premium Indian red wine with notes of blackberry and spice.</p>
+                    </div>
+                </div>
+
+                <!-- Desserts -->
+                <div class="menu-item" data-category="desserts">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Gulab Jamun">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Gulab Jamun</h3>
+                            <span class="menu-item-price">$5.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="menu-item-desc">Soft milk dumplings soaked in rose-scented sugar syrup.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="desserts">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1603532648955-039310d784ed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kulfi">
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Pista Kulfi</h3>
+                            <span class="menu-item-price">$6.99</span>
+                        </div>
+                        <div class="menu-item-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="menu-item-desc">Traditional Indian ice cream with pistachios and cardamom.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Food Gallery</h2>
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1633945274309-2c16c9682a8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Rogan Josh">
+                    <div class="gallery-item-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Butter Chicken">
+                    <div class="gallery-item-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Paneer Tikka">
+                    <div class="gallery-item-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1603532648955-039310d784ed?ixlib=rb-1.2.1&auto=format&fit
